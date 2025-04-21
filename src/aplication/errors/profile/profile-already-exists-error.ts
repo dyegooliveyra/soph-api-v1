@@ -1,6 +1,6 @@
-export class ProfileAlreadyExistsError extends Error {
+export class UserProfileAlreadyExistsError extends Error {
   constructor() {
     super('Profile already exists')
-    this.name = 'ProfileAlreadyExistsError'
+    this.name = 'UserProfileAlreadyExistsError'
   }
 }

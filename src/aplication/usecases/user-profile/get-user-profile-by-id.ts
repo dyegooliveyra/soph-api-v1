@@ -11,14 +11,6 @@ export class GeTUserProfileByIdUseCase {
       throw new UserProfileNotFoundError()
     }
 
-    const userProfileDTO: GetUserProfileOutputDTO = {
-      id: userProfile.id,
-      name: userProfile.name,
-      email: userProfile.email,
-      whatsapp: userProfile.whatsapp,
-      isVerified: userProfile.isVerified,
-    }
-
-    return userProfileDTO
+    return userProfile.toJSON()
   }
 }

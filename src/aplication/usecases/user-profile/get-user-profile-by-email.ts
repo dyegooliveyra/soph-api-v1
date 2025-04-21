@@ -5,20 +5,12 @@ import { UserProfileRepository } from '@/interfaces/repositories/user-profile-re
 export class GeTUserProfileByEmailUseCase {
   constructor(private userProfileRepository: UserProfileRepository) {}
   async execute(email: string): Promise<GetUserProfileOutputDTO> {
-    const profile = await this.userProfileRepository.findByEmail(email)
+    const userProfile = await this.userProfileRepository.findByEmail(email)
 
-    if (!profile) {
+    if (!userProfile) {
       throw new UserProfileNotFoundError()
     }
 
-    const userProfile: GetUserProfileOutputDTO = {
-      id: profile.id,
-      name: profile.name,
-      email: profile.email,
-      whatsapp: profile.whatsapp,
-      isVerified: profile.isVerified,
-    }
-
-    return userProfile
+    return userProfile.toJSON()
   }
 }

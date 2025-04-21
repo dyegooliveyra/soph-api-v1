@@ -1,4 +1,4 @@
-import { ProfileAlreadyExistsError } from '@/aplication/errors/profile'
+import { UserProfileAlreadyExistsError } from '@/aplication/errors/profile'
 import {
   CreateUserProfileInputDTO,
   CreateUserProfileOutputDTO,
@@ -19,7 +19,7 @@ export class CreateUserProfileController
       const result = await this.createUserProfileUseCase.execute(input)
       return ok(result)
     } catch (error) {
-      if (error instanceof ProfileAlreadyExistsError) {
+      if (error instanceof UserProfileAlreadyExistsError) {
         return conflictError('Já existe um perfil cadastrado com este e-mail')
       }
       return serverError(error instanceof Error ? error : new Error('Unknown error'))
