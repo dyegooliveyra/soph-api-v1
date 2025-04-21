@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["src/**/*", "__tests__/profile.spec.ts"],
+  "exclude": ["node_modules", "dist"]
+}
