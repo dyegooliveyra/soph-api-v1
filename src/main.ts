@@ -1,9 +1,9 @@
-import dotenv from 'dotenv'
+
+import 'module-alias/register';
+import 'dotenv/config'
 import { ExpressAdapter } from '@/infra/http/express/express-adapter'
 import { ExpressRouterAdapter } from '@/infra/http/express/express-router-adapter'
 import { Server } from '@/infra/http/server'
-
-dotenv.config()
 
 const startServer = async (): Promise<void> => {
   const port = Number(process.env.PORT) || 3333
