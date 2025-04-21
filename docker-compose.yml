@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - EVOLUTION_API_KEY=${EVOLUTION_API_KEY}
+      - EVOLUTION_API_URL=${EVOLUTION_API_URL}
+    depends_on:
+      - evolution_api
+
+  evolution_api:
+    image: atendai/evolution-api:v1.8.2
+    container_name: evolution_api
+    ports:
+      - '8080:8080'
+    environment:
+      - AUTHENTICATION_API_KEY=clockwork87121212
+      - DATABASE_PROVIDER=none
