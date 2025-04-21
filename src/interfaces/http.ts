@@ -53,3 +53,8 @@ export const serverError = (error: Error): HttpResponse<never> => ({
   statusCode: 500,
   data: { message: error.message },
 })
+
+export const conflictError = (message: string): HttpResponse<never> => ({
+  statusCode: 409,
+  data: { message },
+})

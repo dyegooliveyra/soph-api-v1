@@ -14,3 +14,11 @@ export interface CreateUserProfileOutputDTO {
   createdAt: string
   updatedAt: string
 }
+
+export interface GetUserProfileOutputDTO {
+  id: string
+  name: string
+  email: string
+  whatsapp: string
+  isVerified: boolean
+}

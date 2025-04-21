@@ -1,10 +1,11 @@
+import { ProfileAlreadyExistsError } from '@/aplication/errors/profile'
 import {
   CreateUserProfileInputDTO,
   CreateUserProfileOutputDTO,
 } from '@/aplication/interfaces/dtos/user-profile'
 import { CreateUserProfileUseCase } from '@/aplication/usecases/user-profile'
 import { Controller } from '@/interfaces/controller'
-import { HttpResponse, ok, serverError } from '@/interfaces/http'
+import { conflictError, HttpResponse, ok, serverError } from '@/interfaces/http'
 
 export class CreateUserProfileController
   implements Controller<CreateUserProfileInputDTO, CreateUserProfileOutputDTO>
@@ -18,6 +19,9 @@ export class CreateUserProfileController
       const result = await this.createUserProfileUseCase.execute(input)
       return ok(result)
     } catch (error) {
+      if (error instanceof ProfileAlreadyExistsError) {
+        return conflictError('Já existe um perfil cadastrado com este e-mail')
+      }
       return serverError(error instanceof Error ? error : new Error('Unknown error'))
     }
   }

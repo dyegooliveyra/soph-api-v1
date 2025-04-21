@@ -1,3 +1,4 @@
+import { ProfileAlreadyExistsError } from '@/aplication/errors/profile'
 import { CreateUserProfileInputDTO, CreateUserProfileOutputDTO } from '@/aplication/interfaces/dtos'
 import { UserProfile } from '@/domain/entities'
 import { UserProfileRepository } from '@/interfaces/repositories/user-profile-repository'
@@ -12,7 +13,7 @@ export class CreateUserProfileUseCase {
     const existingUser = await this.userProfileRepository.findByEmail(input.email)
 
     if (existingUser) {
-      throw new Error('User already exists')
+      throw new ProfileAlreadyExistsError()
     }
 
     const id = this.idGenerator.generate()
